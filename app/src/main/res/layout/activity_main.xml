@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="100dp"
+    tools:context="com.app.boletim.activities.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_disciplinas"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/cardview_light_background"
+            android:drawableTop="@drawable/ic_book"
+            android:drawablePadding="3dp"
+            android:padding="25dp"
+            android:layout_margin="10dp"
+            android:elevation="@dimen/cardview_compat_inset_shadow"
+            android:text="@string/disciplinas"/>
+
+        <Button
+            android:id="@+id/btn_agendamentos"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="25dp"
+            android:layout_margin="10dp"
+            android:textSize="13sp"
+            android:background="@color/cardview_light_background"
+            android:elevation="@dimen/cardview_compat_inset_shadow"
+            android:drawableTop="@drawable/ic_clock"
+            android:drawablePadding="3dp"
+            android:text="@string/agendamentos"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_seus_dados"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="25dp"
+            android:layout_margin="10dp"
+            android:background="@color/cardview_light_background"
+            android:elevation="@dimen/cardview_compat_inset_shadow"
+            android:drawableTop="@drawable/ic_user"
+            android:drawablePadding="3dp"
+            android:text="@string/seus_dados" />
+
+        <Button
+            android:id="@+id/btn_sair"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="25dp"
+            android:layout_margin="10dp"
+            android:background="@color/cardview_light_background"
+            android:elevation="@dimen/cardview_compat_inset_shadow"
+            android:drawableTop="@drawable/ic_exit"
+            android:drawablePadding="3dp"
+            android:text="@string/sair" />
+
+    </LinearLayout>
+</LinearLayout>

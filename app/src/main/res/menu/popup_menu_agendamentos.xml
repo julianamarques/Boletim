@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/adicionar_anotacoes"
+        android:title="@string/adicionar_anotacao" />
+
+    <item
+        android:id="@+id/editar_agendamento"
+        android:title="@string/editar" />
+
+    <item
+        android:id="@+id/remover_agendamento"
+        android:title="@string/remover" />
+
+</menu>

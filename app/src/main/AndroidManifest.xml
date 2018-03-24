@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.app.boletim">
+
+    <application
+        android:name=".dal.App"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_nota"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_nota"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".activities.SplashActivity"
+            android:theme="@style/Theme.AppCompat.SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activities.MainActivity" />
+
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/login" />
+
+        <activity
+            android:name=".activities.DiscplinasActivity"
+            android:label="@string/disciplinas"
+            android:parentActivityName=".activities.MainActivity" />
+
+        <activity
+            android:name=".activities.AgendamentosActivity"
+            android:label="@string/agendamentos"
+            android:parentActivityName=".activities.MainActivity" />
+
+        <activity
+            android:name=".activities.SeusDadosActivity"
+            android:label="@string/seus_dados"
+            android:parentActivityName=".activities.MainActivity" />
+
+        <activity
+            android:name=".activities.CadastroDisciplinasActivity"
+            android:label="@string/adicionar_disciplina"
+            android:parentActivityName=".activities.DiscplinasActivity" />
+
+        <activity
+            android:name=".activities.CadastroNotasActivity"
+            android:label="@string/adicionar_notas"
+            android:parentActivityName=".activities.DiscplinasActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+
+        <activity
+            android:name=".activities.NotasActivity"
+            android:label="@string/notas"
+            android:parentActivityName=".activities.DiscplinasActivity" />
+
+        <activity
+            android:name=".activities.CadastroNotaFinalActivity"
+            android:label="@string/adicionar_nota_final"
+            android:parentActivityName=".activities.DiscplinasActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+
+        <activity
+            android:name=".activities.CadastroAnotacoesActivity"
+            android:label="@string/adicionar_anotacao"
+            android:parentActivityName=".activities.AgendamentosActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+
+        <activity
+            android:name=".activities.VisualizacaoAnotacoesActivity"
+            android:parentActivityName=".activities.AgendamentosActivity" />
+
+        <activity
+            android:name=".activities.CadastroAgendamentosActivity"
+            android:label="@string/agendar_prova"
+            android:parentActivityName=".activities.AgendamentosActivity" />
+
+        <activity
+            android:name=".activities.CadastroAlunoActivity"
+            android:label="@string/cadastrar_aluno" />
+
+        <activity android:name=".activities.CadastroRecuperacaoActivity"></activity>
+    </application>
+
+</manifest>

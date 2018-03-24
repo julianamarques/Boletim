@@ -1,0 +1,152 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:4717196001981549677",
+      "lastPropertyId": "6:1831942185332729673",
+      "name": "Agendamento",
+      "properties": [
+        {
+          "id": "1:1754017335198013957",
+          "name": "id"
+        },
+        {
+          "id": "2:1339537875946460551",
+          "name": "titulo"
+        },
+        {
+          "id": "3:7032775080770040474",
+          "name": "data"
+        },
+        {
+          "id": "4:1945662096578823444",
+          "name": "hora"
+        },
+        {
+          "id": "5:2568652430665372613",
+          "name": "anotacao"
+        },
+        {
+          "id": "6:1831942185332729673",
+          "indexId": "3:31951955786359344",
+          "name": "alunoId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:262075888791553672",
+      "lastPropertyId": "8:1837106450894998806",
+      "name": "Aluno",
+      "properties": [
+        {
+          "id": "1:6201541490182855982",
+          "name": "id"
+        },
+        {
+          "id": "2:4115957479660678415",
+          "name": "nome"
+        },
+        {
+          "id": "3:3320320999520702554",
+          "name": "senha"
+        },
+        {
+          "id": "4:6695347121264775631",
+          "name": "institucao"
+        },
+        {
+          "id": "5:8929595948261684780",
+          "name": "email"
+        },
+        {
+          "id": "6:1990040270670292146",
+          "name": "mediaInstitucional"
+        },
+        {
+          "id": "7:7084206373595185881",
+          "name": "mediaPessoal"
+        },
+        {
+          "id": "8:1837106450894998806",
+          "name": "qtdProvas"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:4380702158840288498",
+      "lastPropertyId": "5:6072101635504875033",
+      "name": "Nota",
+      "properties": [
+        {
+          "id": "1:1322298295426008591",
+          "name": "id"
+        },
+        {
+          "id": "3:92171116025752079",
+          "indexId": "1:8999934333265476630",
+          "name": "disciplinaId"
+        },
+        {
+          "id": "4:5389582210353279894",
+          "name": "notaBimestral"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:5338735371669630967",
+      "lastPropertyId": "7:4480022742499685213",
+      "name": "Disciplina",
+      "properties": [
+        {
+          "id": "1:2702249739196589362",
+          "name": "id"
+        },
+        {
+          "id": "2:5953773084079261054",
+          "name": "nome"
+        },
+        {
+          "id": "3:5068904977536429144",
+          "name": "professor"
+        },
+        {
+          "id": "4:7452430613112179414",
+          "name": "media"
+        },
+        {
+          "id": "5:1685797733383630920",
+          "name": "provaFinal"
+        },
+        {
+          "id": "6:2456453918545883679",
+          "name": "disciplinaExtra"
+        },
+        {
+          "id": "7:4480022742499685213",
+          "indexId": "2:7973500733360197865",
+          "name": "alunoId"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "4:5338735371669630967",
+  "lastIndexId": "3:31951955786359344",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    6948804081037006931,
+    6072101635504875033
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
