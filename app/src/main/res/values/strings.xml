@@ -6,7 +6,7 @@
     <string name="sair">Sair</string>
     <string name="salvar">Salvar</string>
     <string name="disciplina_extra">Disciplina Extra</string>
-    <string name="professor">Professor</string>
+    <string name="professor">Professor(a)</string>
     <string name="nome">Nome</string>
     <string name="nota">Nota Bimestral</string>
     <string name="adicionar_notas">Adicionar Nota</string>
@@ -38,7 +38,7 @@
     <string name="hora2">Hora: </string>
     <string name="data2">Data: </string>
     <string name="login">Login</string>
-    <string name="professor2">Professor: </string>
+    <string name="professor2">Professor(a): </string>
     <string name="adicionar_disciplina">Adicionar Disciplina</string>
     <string name="adicionar_nota_final">Adicionar Nota Final</string>
     <string name="agendar_prova">Agendar Prova</string>
