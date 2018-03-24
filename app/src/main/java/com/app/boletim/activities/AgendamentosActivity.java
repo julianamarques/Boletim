@@ -95,7 +95,7 @@ public class AgendamentosActivity extends AppCompatActivity {
     private void removerTodos() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Boletim")
-                .setMessage("Deseja remover todas os agendamentos da lista?")
+                .setMessage("Deseja remover todos os agendamentos da lista?")
                 .setPositiveButton("SIM", new DialogInterface.OnClickListener() {
 
                     @Override
