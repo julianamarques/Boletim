@@ -12,7 +12,7 @@ App para acompanhamento do desempenho escolar de estudantes.
 
 #### Screenshots:
 
-![Telas](http://i64.tinypic.com/24o9hlc.png)
-![Telas](http://i68.tinypic.com/125qhqd.png)
-![Telas](http://i68.tinypic.com/2ia4zra.png)
+![Screenshots](http://i64.tinypic.com/24o9hlc.png)
+![Screenshots](http://i68.tinypic.com/125qhqd.png)
+![Screenshots](http://i68.tinypic.com/2ia4zra.png)
 
