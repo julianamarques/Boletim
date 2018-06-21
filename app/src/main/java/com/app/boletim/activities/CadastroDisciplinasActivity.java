@@ -25,9 +25,9 @@ import butterknife.OnClick;
 import io.objectbox.Box;
 
 public class CadastroDisciplinasActivity extends AppCompatActivity {
-    @BindView(R.id.edit_nome_disciplina) EditText editNomeDisciplina;
-    @BindView(R.id.edit_professor) EditText editProfessor;
-    @BindView(R.id.switch_disciplina_extra) Switch switchDisciplinaExtra;
+    @BindView(R.id.edit_nome_disciplina) protected EditText editNomeDisciplina;
+    @BindView(R.id.edit_professor) protected EditText editProfessor;
+    @BindView(R.id.switch_disciplina_extra) protected Switch switchDisciplinaExtra;
 
     private Box<Disciplina> disciplinaBox;
     private Box<Aluno> alunoBox;

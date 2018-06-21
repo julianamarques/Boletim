@@ -23,8 +23,8 @@ import butterknife.OnClick;
 import io.objectbox.Box;
 
 public class LoginActivity extends Login {
-    @BindView(R.id.edit_login_email) EditText editLoginEmail;
-    @BindView(R.id.edit_login_senha) EditText editLoginSenha;
+    @BindView(R.id.edit_login_email) protected EditText editLoginEmail;
+    @BindView(R.id.edit_login_senha) protected EditText editLoginSenha;
 
     private Box<Aluno> alunoBox;
 

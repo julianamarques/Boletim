@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 import io.objectbox.Box;
 
 public class NotasActivity extends AppCompatActivity {
-    @BindView(R.id.rv_lista_notas) RecyclerView recyclerNotas;
+    @BindView(R.id.rv_lista_notas) protected RecyclerView recyclerNotas;
 
     private Box<Nota> notaBox;
     private long disciplinaId;

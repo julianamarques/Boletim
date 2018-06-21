@@ -16,7 +16,7 @@ import butterknife.OnClick;
 import io.objectbox.Box;
 
 public class CadastroAnotacoesActivity extends AppCompatActivity {
-    @BindView(R.id.edit_anotacao) EditText editAnotacao;
+    @BindView(R.id.edit_anotacao) protected EditText editAnotacao;
 
     private Box<Agendamento> agendamentoBox;
     private Agendamento agendamento;

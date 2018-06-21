@@ -19,7 +19,7 @@ import butterknife.OnClick;
 import io.objectbox.Box;
 
 public class CadastroNotasActivity extends AppCompatActivity {
-    @BindView(R.id.edit_nota) EditText editNota;
+    @BindView(R.id.edit_nota) protected EditText editNota;
 
     private Nota nota;
     private long notaId;

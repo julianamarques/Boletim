@@ -68,10 +68,6 @@
         {
           "id": "7:7084206373595185881",
           "name": "mediaPessoal"
-        },
-        {
-          "id": "8:1837106450894998806",
-          "name": "qtdProvas"
         }
       ],
       "relations": []
@@ -145,7 +141,8 @@
   "retiredIndexUids": [],
   "retiredPropertyUids": [
     6948804081037006931,
-    6072101635504875033
+    6072101635504875033,
+    1837106450894998806
   ],
   "retiredRelationUids": [],
   "version": 1

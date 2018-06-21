@@ -18,12 +18,12 @@ import butterknife.ButterKnife;
 import io.objectbox.Box;
 
 public class SeusDadosActivity extends AppCompatActivity {
-    @BindView(R.id.txt_ver_nome) TextView txtVerNome;
-    @BindView(R.id.txt_ver_email) TextView txtVerEmail;
-    @BindView(R.id.txt_ver_instituicao) TextView txtVerInstituicao;
-    @BindView(R.id.txt_ver_media_instituicao) TextView txtVerMediaMediaInstituicao;
-    @BindView(R.id.txt_ver_media_pessoal) TextView txtVerMediaPessoal;
-    @BindView(R.id.txt_ver_qtd_provas) TextView txtVerQtdProvas;
+    @BindView(R.id.txt_ver_nome) protected TextView txtVerNome;
+    @BindView(R.id.txt_ver_email) protected TextView txtVerEmail;
+    @BindView(R.id.txt_ver_instituicao) protected TextView txtVerInstituicao;
+    @BindView(R.id.txt_ver_media_instituicao) protected TextView txtVerMediaMediaInstituicao;
+    @BindView(R.id.txt_ver_media_pessoal) protected TextView txtVerMediaPessoal;
+    @BindView(R.id.txt_ver_qtd_provas) protected TextView txtVerQtdProvas;
 
     private Box<Aluno> alunoBox;
     private Aluno aluno;

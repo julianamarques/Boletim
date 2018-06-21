@@ -17,14 +17,13 @@ import butterknife.OnClick;
 import io.objectbox.Box;
 
 public class CadastroAlunoActivity extends Login {
-    @BindView(R.id.edit_nome_aluno) EditText editNomeAluno;
-    @BindView(R.id.edit_email) EditText editEmail;
-    @BindView(R.id.edit_senha) EditText editSenha;
-    @BindView(R.id.edit_instituicao) EditText editInstituicao;
-    @BindView(R.id.edit_media_institucional) EditText editMediaInstitucional;
-    @BindView(R.id.edit_media_pessoal) EditText editMediaPessoal;
-    //@BindView(R.id.edit_qtd_provas) EditText editQtdProvas;
-    @BindView(R.id.btn_salvar_aluno) Button btnSalvarAluno;
+    @BindView(R.id.edit_nome_aluno) protected EditText editNomeAluno;
+    @BindView(R.id.edit_email) protected EditText editEmail;
+    @BindView(R.id.edit_senha) protected EditText editSenha;
+    @BindView(R.id.edit_instituicao) protected EditText editInstituicao;
+    @BindView(R.id.edit_media_institucional) protected EditText editMediaInstitucional;
+    @BindView(R.id.edit_media_pessoal) protected EditText editMediaPessoal;
+    @BindView(R.id.btn_salvar_aluno) protected Button btnSalvarAluno;
 
     private Box<Aluno> alunoBox;
     private Aluno aluno;
@@ -47,7 +46,6 @@ public class CadastroAlunoActivity extends Login {
             editInstituicao.setText(aluno.getInstitucao());
             editMediaInstitucional.setText(String.valueOf(aluno.getMediaInstitucional()));
             editMediaPessoal.setText(String.valueOf(aluno.getMediaPessoal()));
-            //editQtdProvas.setText(String.valueOf(aluno.getQtdProvas()));
         }
 
         else {
@@ -64,7 +62,6 @@ public class CadastroAlunoActivity extends Login {
             String email = editEmail.getText().toString();
             String senha = editSenha.getText().toString();
             String instituicao = editInstituicao.getText().toString();
-            //String qtdProvas = editQtdProvas.getText().toString();
 
             aluno.setNome(nomeAluno);
             aluno.setEmail(email);
@@ -72,7 +69,6 @@ public class CadastroAlunoActivity extends Login {
             aluno.setInstitucao(instituicao);
             aluno.setMediaInstitucional(Double.valueOf(mediaInstitucional));
             aluno.setMediaPessoal(Double.valueOf(mediaPessoal));
-            //aluno.setQtdProvas(Integer.valueOf(qtdProvas));
 
             if(nomeAluno.trim().isEmpty()) {
                 editNomeAluno.setError("O campo não pode estar vazio!");

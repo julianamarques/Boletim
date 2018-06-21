@@ -17,7 +17,7 @@ import butterknife.OnClick;
 import io.objectbox.Box;
 
 public class CadastroNotaFinalActivity extends AppCompatActivity {
-    @BindView(R.id.edit_nota_prova_final) EditText editNotaProvaFinal;
+    @BindView(R.id.edit_nota_prova_final) protected EditText editNotaProvaFinal;
 
     private Box<Disciplina> disciplinaBox;
     private Disciplina disciplina;

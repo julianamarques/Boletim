@@ -30,7 +30,7 @@ import butterknife.OnClick;
 import io.objectbox.Box;
 
 public class DiscplinasActivity extends AppCompatActivity {
-    @BindView(R.id.rv_lista_disciplinas) RecyclerView recyclerDisciplinas;
+    @BindView(R.id.rv_lista_disciplinas) protected RecyclerView recyclerDisciplinas;
 
     private Box<Disciplina> disciplinaBox;
     private long idAlunoLogado;

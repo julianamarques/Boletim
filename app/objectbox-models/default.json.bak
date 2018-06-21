@@ -93,10 +93,6 @@
         {
           "id": "4:5389582210353279894",
           "name": "notaBimestral"
-        },
-        {
-          "id": "5:6072101635504875033",
-          "name": "recuperacao"
         }
       ],
       "relations": []
@@ -148,7 +144,8 @@
   "retiredEntityUids": [],
   "retiredIndexUids": [],
   "retiredPropertyUids": [
-    6948804081037006931
+    6948804081037006931,
+    6072101635504875033
   ],
   "retiredRelationUids": [],
   "version": 1

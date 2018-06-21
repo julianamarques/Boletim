@@ -83,7 +83,6 @@
             android:name=".activities.CadastroAlunoActivity"
             android:label="@string/cadastrar_aluno" />
 
-        <activity android:name=".activities.CadastroRecuperacaoActivity"></activity>
     </application>
 
 </manifest>

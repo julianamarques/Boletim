@@ -28,9 +28,9 @@ import butterknife.OnClick;
 import io.objectbox.Box;
 
 public class CadastroAgendamentosActivity extends AppCompatActivity {
-    @BindView(R.id.calendario) MaterialCalendarView materialCalendarView;
-    @BindView(R.id.edit_titulo) EditText editTitulo;
-    @BindView(R.id.edit_hora) EditText editHora;
+    @BindView(R.id.calendario) protected MaterialCalendarView materialCalendarView;
+    @BindView(R.id.edit_titulo) protected EditText editTitulo;
+    @BindView(R.id.edit_hora) protected EditText editHora;
 
     private Box<Agendamento> agendamentoBox;
     private Agendamento agendamento;

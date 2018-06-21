@@ -31,7 +31,7 @@ import butterknife.OnClick;
 import io.objectbox.Box;
 
 public class AgendamentosActivity extends AppCompatActivity {
-    @BindView(R.id.rv_lista_agendamentos) RecyclerView recyclerAgendamentos;
+    @BindView(R.id.rv_lista_agendamentos) protected RecyclerView recyclerAgendamentos;
 
     private Box<Agendamento> agendamentoBox;
     private long idAlunoLogado;

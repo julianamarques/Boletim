@@ -18,7 +18,7 @@ public class Aluno {
     private String email;
     private double mediaInstitucional;
     private double mediaPessoal;
-    final private int qtdProvas = 4;
+    final private static int qtdProvas = 4;
     @Backlink private ToMany<Disciplina> disciplinas;
     @Backlink private ToMany<Agendamento> agendamentos;
 
@@ -77,10 +77,6 @@ public class Aluno {
     public double getMediaPessoal() {
         return mediaPessoal;
     }
-
-    /*public void setQtdProvas(int qtdProvas) {
-        this.qtdProvas = qtdProvas;
-    }*/
 
     public int getQtdProvas() {
         return qtdProvas;

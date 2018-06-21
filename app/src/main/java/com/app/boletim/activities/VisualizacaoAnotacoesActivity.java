@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 import io.objectbox.Box;
 
 public class VisualizacaoAnotacoesActivity extends AppCompatActivity {
-    @BindView(R.id.txt_ver_anotacao) TextView txtVerAnotacao;
+    @BindView(R.id.txt_ver_anotacao) protected TextView txtVerAnotacao;
 
     private Box<Agendamento> agendamentoBox;
     private Agendamento agendamento;
