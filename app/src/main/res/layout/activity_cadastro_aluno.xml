@@ -102,23 +102,6 @@
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
-        <!-- TODO: LEMBRAR DE SETAR A QUANTIDADE DE BIMESTRES COMO CONSTANTE NA CLASSE ALUNO E TIRAR ESSE EDIT TEXT DAQUI
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edit_qtd_provas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:hint="@string/qtd_provas"
-                android:inputType="numberDecimal"
-                android:text="4"
-                android:visibility="gone" />
-
-        </android.support.design.widget.TextInputLayout>-->
-
         <Button
             android:id="@+id/btn_salvar_aluno"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
