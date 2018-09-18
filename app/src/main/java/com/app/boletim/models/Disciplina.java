@@ -1,25 +1,20 @@
 package com.app.boletim.models;
 
-import io.objectbox.annotation.Backlink;
-import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
-import io.objectbox.relation.ToMany;
-import io.objectbox.relation.ToOne;
+import java.util.List;
 
 /**
  * Created by juliana on 15/03/18.
  */
 
-@Entity
 public class Disciplina {
-    @Id private long id;
+    private long id;
     private String nome;
     private String professor;
     private double media;
     private double provaFinal;
     private boolean disciplinaExtra;
-    private ToOne<Aluno> aluno;
-    @Backlink private ToMany<Nota> notas;
+    private Aluno aluno;
+    private List<Nota> notas;
 
     public Disciplina() {}
 
@@ -68,26 +63,26 @@ public class Disciplina {
         return disciplinaExtra;
     }
 
-    public void setNotas(ToMany<Nota> notas) {
+    public void setNotas(List<Nota> notas) {
         this.notas = notas;
     }
 
-    public ToMany<Nota> getNotas() {
+    public List<Nota> getNotas() {
         return notas;
     }
 
-    public void setAluno(ToOne<Aluno> aluno) {
+    public void setAluno(Aluno aluno) {
         this.aluno = aluno;
     }
 
-    public ToOne<Aluno> getAluno() {
+    public Aluno getAluno() {
         return aluno;
     }
 
     public double getMedia() {
-        int totalDeProvas = getAluno().getTarget().getQtdProvas();
+        int totalDeProvas = getAluno().getQtdProvas();
         double soma = 0;
-        double mediaInstitucional = getAluno().getTarget().getMediaInstitucional();
+        double mediaInstitucional = getAluno().getMediaInstitucional();
 
         for(int i = 0; i < getNotas().size(); i++) {
             soma += getNotas().get(i).getNotaBimestral();
@@ -103,8 +98,8 @@ public class Disciplina {
     }
 
     public String informarSituacao() {
-        double mediaInstitucional = getAluno().getTarget().getMediaInstitucional();
-        double mediaPessoal = getAluno().getTarget().getMediaPessoal();
+        double mediaInstitucional = getAluno().getMediaInstitucional();
+        double mediaPessoal = getAluno().getMediaPessoal();
 
         if(estaDeProvaFinal()) {
             if(getMedia() >= mediaInstitucional && getMedia() > mediaPessoal) {
@@ -138,7 +133,7 @@ public class Disciplina {
     }
 
     public boolean estaDeProvaFinal() {
-        double mediaInstitucional = getAluno().getTarget().getMediaInstitucional();
+        double mediaInstitucional = getAluno().getMediaInstitucional();
 
         if(getMedia() < mediaInstitucional && provaFinal == 0) {
             return true;

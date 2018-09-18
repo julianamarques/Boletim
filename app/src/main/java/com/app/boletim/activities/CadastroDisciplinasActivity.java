@@ -15,22 +15,18 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.app.boletim.R;
-import com.app.boletim.dal.App;
 import com.app.boletim.models.Aluno;
 import com.app.boletim.models.Disciplina;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.objectbox.Box;
 
 public class CadastroDisciplinasActivity extends AppCompatActivity {
     @BindView(R.id.edit_nome_disciplina) protected EditText editNomeDisciplina;
     @BindView(R.id.edit_professor) protected EditText editProfessor;
     @BindView(R.id.switch_disciplina_extra) protected Switch switchDisciplinaExtra;
 
-    private Box<Disciplina> disciplinaBox;
-    private Box<Aluno> alunoBox;
     private Aluno alunoLogado;
     private Disciplina disciplina;
 
@@ -41,14 +37,11 @@ public class CadastroDisciplinasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_disciplinas);
         ButterKnife.bind(this);
 
-        disciplinaBox = ((App)getApplication()).getBoxStore().boxFor(Disciplina.class);
-        alunoBox = ((App)getApplication()).getBoxStore().boxFor(Aluno.class);
         alunoLogado = getAlunoLogado();
 
         long disciplinaId = getIntent().getLongExtra("disciplinaId", -1);
 
         if(disciplinaId != -1) {
-            disciplina = disciplinaBox.get(disciplinaId);
 
             editNomeDisciplina.setText(disciplina.getNome());
             editProfessor.setText(disciplina.getProfessor());
@@ -78,9 +71,8 @@ public class CadastroDisciplinasActivity extends AppCompatActivity {
             disciplina.setNome(nomeDisciplina);
             disciplina.setProfessor(professor);
             disciplina.setDisciplinaExtra(ehDisciplinaExtra);
-            disciplina.getAluno().setTarget(alunoLogado);
+            disciplina.getAluno();
 
-            disciplinaBox.put(disciplina);
             finish();
         }
     }
@@ -88,6 +80,6 @@ public class CadastroDisciplinasActivity extends AppCompatActivity {
     private Aluno getAlunoLogado() {
         SharedPreferences preferences = getSharedPreferences("boletim.file", MODE_PRIVATE);
         long id = preferences.getLong("alunoId", -1);
-        return alunoBox.get(id);
+
     }
 }

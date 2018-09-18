@@ -12,19 +12,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.app.boletim.R;
-import com.app.boletim.models.Agendamento;
-import com.app.boletim.models.Agendamento_;
-import com.app.boletim.models.Disciplina;
-import com.app.boletim.models.Disciplina_;
-import com.app.boletim.models.Nota;
-import com.app.boletim.models.Nota_;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.objectbox.Box;
 
 public class MainActivity extends AppCompatActivity {
 

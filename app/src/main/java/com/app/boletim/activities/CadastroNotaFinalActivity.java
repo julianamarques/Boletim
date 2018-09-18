@@ -1,14 +1,12 @@
 package com.app.boletim.activities;
 
 import android.content.SharedPreferences;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import com.app.boletim.R;
-import com.app.boletim.dal.App;
 import com.app.boletim.models.Disciplina;
 
 import butterknife.BindView;
@@ -54,7 +52,7 @@ public class CadastroNotaFinalActivity extends AppCompatActivity {
 
         else {
             disciplina.setProvaFinal(Double.valueOf(notaProvaFinal));
-            disciplina.getAluno().setTargetId(idAlunoLogado);
+            disciplina.getAluno();
             disciplinaBox.put(disciplina);
 
             finish();

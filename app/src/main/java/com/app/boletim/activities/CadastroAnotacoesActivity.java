@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.app.boletim.R;
-import com.app.boletim.dal.App;
 import com.app.boletim.models.Agendamento;
 
 import butterknife.BindView;
@@ -43,7 +42,7 @@ public class CadastroAnotacoesActivity extends AppCompatActivity {
     public void salvarAnotacao(View view) {
         String anotacao = editAnotacao.getText().toString();
         agendamento.setAnotacao(anotacao);
-        agendamento.getAluno().setTargetId(idAlunoLogado);
+        agendamento.getAluno();
         agendamentoBox.put(agendamento);
 
         finish();

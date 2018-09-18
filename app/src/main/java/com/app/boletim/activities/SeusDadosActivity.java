@@ -10,12 +10,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.app.boletim.R;
-import com.app.boletim.dal.App;
 import com.app.boletim.models.Aluno;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.objectbox.Box;
 
 public class SeusDadosActivity extends AppCompatActivity {
     @BindView(R.id.txt_ver_nome) protected TextView txtVerNome;
@@ -25,7 +23,6 @@ public class SeusDadosActivity extends AppCompatActivity {
     @BindView(R.id.txt_ver_media_pessoal) protected TextView txtVerMediaPessoal;
     @BindView(R.id.txt_ver_qtd_provas) protected TextView txtVerQtdProvas;
 
-    private Box<Aluno> alunoBox;
     private Aluno aluno;
 
     @Override
@@ -39,7 +36,6 @@ public class SeusDadosActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        alunoBox = ((App)getApplication()).getBoxStore().boxFor(Aluno.class);
         aluno = obterAlunoLogado();
 
         txtVerNome.setText(aluno.getNome());
@@ -77,7 +73,5 @@ public class SeusDadosActivity extends AppCompatActivity {
     private Aluno obterAlunoLogado(){
         final SharedPreferences preferences = getSharedPreferences("boletim.file", MODE_PRIVATE);
         long id = preferences.getLong("alunoId", -1);
-
-        return alunoBox.get(id);
     }
 }

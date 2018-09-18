@@ -1,17 +1,13 @@
 package com.app.boletim.models;
 
-import io.objectbox.annotation.Backlink;
-import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
-import io.objectbox.relation.ToMany;
+import java.util.List;
 
 /**
  * Created by juliana on 15/03/18.
  */
 
-@Entity
 public class Aluno {
-    @Id private long id;
+    private long id;
     private String nome;
     private String senha;
     private String institucao;
@@ -19,8 +15,8 @@ public class Aluno {
     private double mediaInstitucional;
     private double mediaPessoal;
     final private static int qtdProvas = 4;
-    @Backlink private ToMany<Disciplina> disciplinas;
-    @Backlink private ToMany<Agendamento> agendamentos;
+    private List<Disciplina> disciplinas;
+    private List<Agendamento> agendamentos;
 
     public void setId(long id) {
         this.id = id;
@@ -82,19 +78,19 @@ public class Aluno {
         return qtdProvas;
     }
 
-    public void setDisciplinas(ToMany<Disciplina> disciplinas) {
+    public void setDisciplinas(List<Disciplina> disciplinas) {
         this.disciplinas = disciplinas;
     }
 
-    public ToMany<Disciplina> getDisciplinas() {
+    public List<Disciplina> getDisciplinas() {
         return disciplinas;
     }
 
-    public void setAgendamentos(ToMany<Agendamento> agendamentos) {
+    public void setAgendamentos(List<Agendamento> agendamentos) {
         this.agendamentos = agendamentos;
     }
 
-    public ToMany<Agendamento> getAgendamentos() {
+    public List<Agendamento> getAgendamentos() {
         return agendamentos;
     }
 }

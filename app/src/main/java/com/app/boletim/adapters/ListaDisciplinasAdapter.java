@@ -38,14 +38,10 @@ public class ListaDisciplinasAdapter extends RecyclerView.Adapter<ListaDisciplin
     private Context context;
     private Disciplina disciplina;
     private List<Disciplina> disciplinas;
-    private Box<Disciplina> disciplinaBox;
-    private Nota nota;
-    private Box<Nota> notaBox;
 
-    public ListaDisciplinasAdapter(Context context, List<Disciplina> disciplinas, Box<Disciplina> disciplinaBox) {
+    public ListaDisciplinasAdapter(Context context, List<Disciplina> disciplinas) {
         this.context = context;
         this.disciplinas = disciplinas;
-        this.disciplinaBox = disciplinaBox;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -73,9 +69,9 @@ public class ListaDisciplinasAdapter extends RecyclerView.Adapter<ListaDisciplin
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Disciplina disciplina = this.disciplinas.get(position);
-        int totalDeProvas = disciplina.getAluno().getTarget().getQtdProvas();
+        int totalDeProvas = disciplina.getAluno().getQtdProvas();
         double media = disciplina.getMedia();
-        double mediaInstitucional = disciplina.getAluno().getTarget().getMediaInstitucional();
+        double mediaInstitucional = disciplina.getAluno().getMediaInstitucional();
 
 
         holder.txtNomeDisciplina.setText(disciplina.getNome());
@@ -128,9 +124,9 @@ public class ListaDisciplinasAdapter extends RecyclerView.Adapter<ListaDisciplin
     }
 
     public void configurarClickLongo(final View itemView, final Disciplina disciplina, final int position) {
-        int totalDeProvas = this.disciplinas.get(position).getAluno().getTarget().getQtdProvas();
+        int totalDeProvas = this.disciplinas.get(position).getAluno().getQtdProvas();
         int tamanhoDaListaDeNotas = this.disciplinas.get(position).getNotas().size();
-        double mediaInstitucional = this.disciplinas.get(position).getAluno().getTarget().getMediaInstitucional();
+        double mediaInstitucional = this.disciplinas.get(position).getAluno().getMediaInstitucional();
 
         itemView.setOnLongClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(context, view);
@@ -225,7 +221,6 @@ public class ListaDisciplinasAdapter extends RecyclerView.Adapter<ListaDisciplin
 
         builder.setPositiveButton("SIM", (dialog, which) -> {
             this.disciplinas.remove(disciplina);
-            this.disciplinaBox.remove(disciplina);
 
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, getItemCount());

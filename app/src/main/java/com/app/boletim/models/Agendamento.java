@@ -2,22 +2,17 @@ package com.app.boletim.models;
 
 import java.util.Date;
 
-import io.objectbox.annotation.Backlink;
-import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
-import io.objectbox.relation.ToOne;
-
 /**
  * Created by juliana on 15/03/18.
  */
-@Entity
+
 public class Agendamento {
-    @Id private long id;
+    private long id;
     private String titulo;
     private Date data;
     private String hora;
     private String anotacao;
-    private ToOne<Aluno> aluno;
+    private Aluno aluno;
 
     public Agendamento() {}
 
@@ -61,11 +56,11 @@ public class Agendamento {
         return anotacao;
     }
 
-    public void setAluno(ToOne<Aluno> aluno) {
+    public void setAluno(Aluno aluno) {
         this.aluno = aluno;
     }
 
-    public ToOne<Aluno> getAluno() {
+    public Aluno getAluno() {
         return aluno;
     }
 }

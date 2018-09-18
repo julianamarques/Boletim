@@ -3,7 +3,6 @@ package com.app.boletim.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,22 +16,14 @@ import android.view.View;
 
 import com.app.boletim.R;
 import com.app.boletim.adapters.ListaDisciplinasAdapter;
-import com.app.boletim.dal.App;
-import com.app.boletim.models.Agendamento;
-import com.app.boletim.models.Disciplina;
-import com.app.boletim.models.Disciplina_;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.objectbox.Box;
 
 public class DiscplinasActivity extends AppCompatActivity {
     @BindView(R.id.rv_lista_disciplinas) protected RecyclerView recyclerDisciplinas;
 
-    private Box<Disciplina> disciplinaBox;
     private long idAlunoLogado;
 
     @Override
@@ -41,7 +32,6 @@ public class DiscplinasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_discplinas);
         ButterKnife.bind(this);
 
-        disciplinaBox = ((App)getApplication()).getBoxStore().boxFor(Disciplina.class);
         idAlunoLogado = getIdAlunoLogado();
     }
 
@@ -49,8 +39,7 @@ public class DiscplinasActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        List<Disciplina> disciplinas = disciplinaBox.query().equal(Disciplina_.alunoId, idAlunoLogado).build().find();
-        ListaDisciplinasAdapter adapter = new ListaDisciplinasAdapter(this, disciplinas, disciplinaBox);
+        ListaDisciplinasAdapter adapter = new ListaDisciplinasAdapter(this, disciplinas);
 
         recyclerDisciplinas.setLayoutManager(new LinearLayoutManager(this));
         recyclerDisciplinas.setAdapter(adapter);
@@ -101,8 +90,6 @@ public class DiscplinasActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        List<Disciplina> disciplinas = disciplinaBox.query().equal(Disciplina_.alunoId, idAlunoLogado).build().find();
-                        disciplinaBox.remove(disciplinas);
                         recyclerDisciplinas.setVisibility(View.GONE);
                         Snackbar.make(recyclerDisciplinas, "Todas as disciplinas foram removidas!", Snackbar.LENGTH_LONG).show();
                     }

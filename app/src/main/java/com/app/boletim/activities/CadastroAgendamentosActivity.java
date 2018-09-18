@@ -2,17 +2,13 @@ package com.app.boletim.activities;
 
 import android.app.DialogFragment;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.app.boletim.R;
-import com.app.boletim.dal.App;
 import com.app.boletim.fragments.TimePickerFragment;
 import com.app.boletim.models.Agendamento;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -25,14 +21,12 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.objectbox.Box;
 
 public class CadastroAgendamentosActivity extends AppCompatActivity {
     @BindView(R.id.calendario) protected MaterialCalendarView materialCalendarView;
     @BindView(R.id.edit_titulo) protected EditText editTitulo;
     @BindView(R.id.edit_hora) protected EditText editHora;
 
-    private Box<Agendamento> agendamentoBox;
     private Agendamento agendamento;
     private long agendamentoId;
     private long idAlunoLogado;
@@ -43,13 +37,10 @@ public class CadastroAgendamentosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_agendamentos);
         ButterKnife.bind(this);
 
-        agendamentoBox = ((App)getApplication()).getBoxStore().boxFor(Agendamento.class);
         agendamentoId = getIntent().getLongExtra("agendamentoId", -1);
         idAlunoLogado = getIdAlunoLogado();
 
         if(agendamentoId != -1) {
-            agendamento = agendamentoBox.get(agendamentoId);
-
             materialCalendarView.setSelectedDate(agendamento.getData());
             editTitulo.setText(agendamento.getTitulo());
             editHora.setText(agendamento.getHora());
@@ -102,9 +93,6 @@ public class CadastroAgendamentosActivity extends AppCompatActivity {
             agendamento.setData(data);
             agendamento.setHora(hora);
             agendamento.setTitulo(titulo);
-            agendamento.getAluno().setTargetId(idAlunoLogado);
-
-            agendamentoBox.put(agendamento);
 
             finish();
         }

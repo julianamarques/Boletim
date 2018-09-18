@@ -35,12 +35,10 @@ public class ListaAgendamentosAdapter extends RecyclerView.Adapter<ListaAgendame
     private Context context;
     private Agendamento agendamento;
     private List<Agendamento> agendamentos;
-    private Box<Agendamento> agendamentoBox;
 
-    public ListaAgendamentosAdapter(Context context, List<Agendamento> agendamentos, Box<Agendamento> agendamentoBox) {
+    public ListaAgendamentosAdapter(Context context, List<Agendamento> agendamentos) {
         this.context = context;
         this.agendamentos = agendamentos;
-        this.agendamentoBox = agendamentoBox;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -136,7 +134,6 @@ public class ListaAgendamentosAdapter extends RecyclerView.Adapter<ListaAgendame
 
         builder.setPositiveButton("SIM", (dialog, which) -> {
             this.agendamentos.remove(agendamento);
-            this.agendamentoBox.remove(agendamento);
 
             notifyItemRemoved(position);
             notifyItemChanged(position);

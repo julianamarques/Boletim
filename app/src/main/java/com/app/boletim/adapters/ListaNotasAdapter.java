@@ -31,12 +31,10 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.Vi
     private Context context;
     private Nota nota;
     private List<Nota> notas;
-    private Box<Nota> notaBox;
 
-    public ListaNotasAdapter(Context context, List<Nota> notas, Box<Nota> notaBox) {
+    public ListaNotasAdapter(Context context, List<Nota> notas) {
         this.context = context;
         this.notas = notas;
-        this.notaBox = notaBox;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,7 +60,7 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Nota nota = this.notas.get(position);
-        double media = nota.getDisciplina().getTarget().getAluno().getTarget().getMediaInstitucional();
+        double media = nota.getDisciplina().getAluno().getMediaInstitucional();
 
         holder.txtContaBimestre.setText(" " + (position + 1) + "º BIMESTRE");
         holder.txtVerNota.setText(" " + String.valueOf(nota.getNotaBimestral()));
@@ -94,10 +92,6 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.Vi
             popupMenu.getMenuInflater().inflate(R.menu.popup_menu_notas, popupMenu.getMenu());
 
             popupMenu.setOnMenuItemClickListener(item -> {
-                //if(item.getItemId() == R.id.editar_nota) {
-                //    editar(itemView, nota, position);
-                //}
-
                 if(item.getItemId() == R.id.remover_nota) {
                     remover(itemView, nota, position);
                 }
@@ -111,14 +105,6 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.Vi
         });
     }
 
-    //TODO: Ajeitar o editar das notas
-    /*public void editar(View view, Nota nota, int position) {
-        Intent intent = new Intent(context, CadastroNotasActivity.class);
-        intent.putExtra("notaId", nota.getId());
-        context.startActivity(intent);
-        notifyItemChanged(position);
-    }*/
-
     public void remover(View view, Nota nota, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
         builder.setTitle("Boletim");
@@ -126,7 +112,6 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.Vi
 
         builder.setPositiveButton("SIM", (dialog, which) -> {
             this.notas.remove(nota);
-            this.notaBox.remove(nota);
 
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, getItemCount());

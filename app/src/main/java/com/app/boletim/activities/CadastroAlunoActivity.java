@@ -7,13 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.app.boletim.R;
-import com.app.boletim.dal.App;
 import com.app.boletim.models.Aluno;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.objectbox.Box;
 
 public class CadastroAlunoActivity extends Login {
     @BindView(R.id.edit_nome_aluno) protected EditText editNomeAluno;
@@ -24,7 +22,6 @@ public class CadastroAlunoActivity extends Login {
     @BindView(R.id.edit_media_pessoal) protected EditText editMediaPessoal;
     @BindView(R.id.btn_salvar_aluno) protected Button btnSalvarAluno;
 
-    private Box<Aluno> alunoBox;
     private Aluno aluno;
 
     @Override
@@ -32,13 +29,9 @@ public class CadastroAlunoActivity extends Login {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_aluno);
         ButterKnife.bind(this);
-
-        alunoBox = ((App)getApplication()).getBoxStore().boxFor(Aluno.class);
         long id = getIntent().getLongExtra("alunoId", -1);
 
         if(id != -1) {
-            aluno = alunoBox.get(id);
-
             editNomeAluno.setText(aluno.getNome());
             editEmail.setText(aluno.getEmail());
             editSenha.setText(aluno.getSenha());
@@ -98,8 +91,6 @@ public class CadastroAlunoActivity extends Login {
             }
 
             else {
-                alunoBox.put(aluno);
-
                 finish();
 
                 logar(aluno);
