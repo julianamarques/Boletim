@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "68281281636",
+    "firebase_url": "https://boletim-e3f3d.firebaseio.com",
+    "project_id": "boletim-e3f3d",
+    "storage_bucket": "boletim-e3f3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68281281636:android:afa0b56e9ff9933c",
+        "android_client_info": {
+          "package_name": "com.app.boletim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "68281281636-al5dt6i438t73vjebdjgqe3vaasccdd3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.boletim",
+            "certificate_hash": "4d1955a22fb9268458c325827846a4ff3ae9d8ba"
+          }
+        },
+        {
+          "client_id": "68281281636-8jc2pigl885obuu04dp9epf8p00gn10u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc2uHc3u_5xmNLwXGhS1q1xKXpoZDrVSo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "68281281636-8jc2pigl885obuu04dp9epf8p00gn10u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
