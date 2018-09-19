@@ -1,7 +1,9 @@
 package com.app.boletim.activities;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,14 +11,19 @@ import android.widget.EditText;
 import com.app.boletim.R;
 import com.app.boletim.dao.AlunoDAO;
 import com.app.boletim.dao.ConfiguracaoFirebase;
+import com.app.boletim.dao.ConfiguracaoFirebaseAuth;
 import com.app.boletim.models.Aluno;
 import com.app.boletim.utils.ValidacaoCadastroAluno;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CadastroAlunoActivity extends Login {
+public class CadastroAlunoActivity extends AppCompatActivity {
     @BindView(R.id.edit_nome_aluno) protected EditText editNomeAluno;
     @BindView(R.id.edit_email) protected EditText editEmail;
     @BindView(R.id.edit_senha) protected EditText editSenha;
@@ -26,6 +33,7 @@ public class CadastroAlunoActivity extends Login {
     @BindView(R.id.btn_salvar_aluno) protected Button btnSalvarAluno;
 
     private Aluno aluno;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,8 @@ public class CadastroAlunoActivity extends Login {
         else {
             aluno = new Aluno();
         }
+
+        auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
     }
 
     @OnClick(R.id.btn_salvar_aluno)
@@ -58,9 +68,21 @@ public class CadastroAlunoActivity extends Login {
         String mediaPessoal = editMediaPessoal.getText().toString();
 
         try {
-            ValidacaoCadastroAluno.validarCampoVazio(editNomeAluno, editEmail, editSenha, editInstituicao, editMediaInstitucional, editMediaPessoal);
-            AlunoDAO.cadastrarAluno(nome, email, senha, instituicao, Double.valueOf(mediaInstitucional), Double.valueOf(mediaPessoal));
-            finish();
+            auth.createUserWithEmailAndPassword(email, senha)
+                    .addOnCompleteListener(CadastroAlunoActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                ValidacaoCadastroAluno.validarCampoVazio(editNomeAluno, editEmail, editSenha, editInstituicao, editMediaInstitucional, editMediaPessoal);
+                                AlunoDAO.cadastrarAluno(nome, email, senha, instituicao, Double.valueOf(mediaInstitucional), Double.valueOf(mediaPessoal), auth.getUid());
+                                finish();
+                            }
+
+                            else {
+                                Snackbar.make(view, "Não foi possível cadastrar!", Snackbar.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
         }
 
         catch (IllegalArgumentException e) {
