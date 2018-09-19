@@ -1,19 +1,23 @@
 package com.app.boletim.models;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by juliana on 15/03/18.
  */
 
 public class Disciplina {
-    private long id;
+    private String id;
     private String nome;
     private String professor;
     private double media;
     private double provaFinal;
     private boolean disciplinaExtra;
-    private Aluno aluno;
+    private String alunoId;
     private List<Nota> notas;
 
     public Disciplina() {}
@@ -23,11 +27,11 @@ public class Disciplina {
         this.professor = professor;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
@@ -71,12 +75,12 @@ public class Disciplina {
         return notas;
     }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
+    public void setAlunoId(String alunoId) {
+        this.alunoId = alunoId;
     }
 
-    public Aluno getAluno() {
-        return aluno;
+    public String getAlunoId() {
+        return alunoId;
     }
 
     public double getMedia() {
@@ -140,5 +144,18 @@ public class Disciplina {
         }
 
         return false;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> disciplina = new HashMap<>();
+
+        disciplina.put("id", id);
+        disciplina.put("nome", professor);
+        disciplina.put("media", media);
+        disciplina.put("provaFinal", provaFinal);
+        disciplina.put("disciplinaExtra", disciplinaExtra);
+
+        return disciplina;
     }
 }

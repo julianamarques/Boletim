@@ -3,6 +3,7 @@ package com.app.boletim.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,14 @@ import android.view.View;
 
 import com.app.boletim.R;
 import com.app.boletim.adapters.ListaDisciplinasAdapter;
+import com.app.boletim.dao.ConfiguracaoFirebase;
+import com.app.boletim.models.Disciplina;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +48,7 @@ public class DiscplinasActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        ListaDisciplinasAdapter adapter = new ListaDisciplinasAdapter(this, disciplinas);
+        ListaDisciplinasAdapter adapter = new ListaDisciplinasAdapter(this, listarDisciplinas());
 
         recyclerDisciplinas.setLayoutManager(new LinearLayoutManager(this));
         recyclerDisciplinas.setAdapter(adapter);
@@ -97,5 +106,29 @@ public class DiscplinasActivity extends AppCompatActivity {
                 .setNegativeButton("NÃO", null)
                 .create().show();
 
+    }
+
+
+    public List<Disciplina> listarDisciplinas() {
+        final List<Disciplina> disciplinas = new ArrayList<>();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("disciplinas").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                disciplinas.clear();
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Disciplina disciplina = snapshot.getValue(Disciplina.class);
+                    disciplinas.add(disciplina);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return disciplinas;
     }
 }

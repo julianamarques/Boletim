@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -15,8 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.app.boletim.R;
+import com.app.boletim.dao.DisciplinaDAO;
 import com.app.boletim.models.Aluno;
 import com.app.boletim.models.Disciplina;
+import com.app.boletim.utils.ValidacaoCadastroDisciplina;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,8 +40,6 @@ public class CadastroDisciplinasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_disciplinas);
         ButterKnife.bind(this);
 
-        alunoLogado = getAlunoLogado();
-
         long disciplinaId = getIntent().getLongExtra("disciplinaId", -1);
 
         if(disciplinaId != -1) {
@@ -55,31 +56,25 @@ public class CadastroDisciplinasActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_salvar_disciplina)
     public void salvarDisciplina(View view) {
-        String nomeDisciplina = editNomeDisciplina.getText().toString();
+        String nome = editNomeDisciplina.getText().toString();
         String professor = editProfessor.getText().toString();
-        boolean ehDisciplinaExtra = switchDisciplinaExtra.isChecked();
+        boolean disciplinaExtra = switchDisciplinaExtra.isChecked();
 
-        if(nomeDisciplina.trim().isEmpty()) {
-            editNomeDisciplina.setError("O campo não pode estar vazio!");
-        }
 
-        else if(professor.trim().isEmpty()) {
-            editProfessor.setError("O campo não pode estar vazio!");
-        }
-
-        else {
-            disciplina.setNome(nomeDisciplina);
-            disciplina.setProfessor(professor);
-            disciplina.setDisciplinaExtra(ehDisciplinaExtra);
-            disciplina.getAluno();
-
+        try {
+            ValidacaoCadastroDisciplina.validarCampoVazio(editNomeDisciplina, editProfessor);
+            DisciplinaDAO.cadastrarDisciplina(nome, professor, disciplinaExtra, "");
             finish();
+        }
+
+        catch (IllegalArgumentException e) {
+            Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_SHORT);
         }
     }
 
-    private Aluno getAlunoLogado() {
+    private String getAlunoIdLogado() {
         SharedPreferences preferences = getSharedPreferences("boletim.file", MODE_PRIVATE);
-        long id = preferences.getLong("alunoId", -1);
+        return preferences.getString("alunoId", "");
 
     }
 }

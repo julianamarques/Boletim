@@ -1,28 +1,32 @@
 package com.app.boletim.models;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by juliana on 15/03/18.
  */
 
 public class Aluno {
-    private long id;
+    private String id;
     private String nome;
+    private String email;
     private String senha;
     private String institucao;
-    private String email;
     private double mediaInstitucional;
     private double mediaPessoal;
     final private static int qtdProvas = 4;
     private List<Disciplina> disciplinas;
     private List<Agendamento> agendamentos;
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
@@ -32,6 +36,14 @@ public class Aluno {
 
     public String getNome() {
         return nome;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setSenha(String senha) {
@@ -48,14 +60,6 @@ public class Aluno {
 
     public String getInstitucao() {
         return institucao;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public void setMediaInstitucional(double mediaInstitucional) {
@@ -93,4 +97,20 @@ public class Aluno {
     public List<Agendamento> getAgendamentos() {
         return agendamentos;
     }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> aluno = new HashMap<>();
+
+        aluno.put("id", id);
+        aluno.put("nome", nome);
+        aluno.put("email", email);
+        aluno.put("senha", senha);
+        aluno.put("mediaInstitucional", mediaInstitucional);
+        aluno.put("mediaPessoal", mediaPessoal);
+        aluno.put("qtdProvas", qtdProvas);
+
+        return aluno;
+    }
+
 }

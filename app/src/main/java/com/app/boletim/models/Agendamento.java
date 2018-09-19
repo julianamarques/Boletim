@@ -1,26 +1,30 @@
 package com.app.boletim.models;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by juliana on 15/03/18.
  */
 
 public class Agendamento {
-    private long id;
+    private String id;
     private String titulo;
     private Date data;
     private String hora;
     private String anotacao;
-    private Aluno aluno;
+    private String alunoId;
 
     public Agendamento() {}
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
@@ -56,11 +60,25 @@ public class Agendamento {
         return anotacao;
     }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
+    public void setAlunoId(String alunoId) {
+        this.alunoId = alunoId;
     }
 
-    public Aluno getAluno() {
-        return aluno;
+    public String getAlunoId() {
+        return alunoId;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> agendamento = new HashMap<>();
+
+        agendamento.put("id", id);
+        agendamento.put("titulo", titulo);
+        agendamento.put("data", data);
+        agendamento.put("hora", hora);
+        agendamento.put("anotacao", anotacao);
+        agendamento.put("AlunoId", alunoId);
+
+        return agendamento;
     }
 }

@@ -5,15 +5,15 @@ package com.app.boletim.models;
  */
 
 public class Nota {
-    private long id;
+    private String id;
     private double notaBimestral;
     private Disciplina disciplina;
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

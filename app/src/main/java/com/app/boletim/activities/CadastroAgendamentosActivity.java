@@ -9,8 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.app.boletim.R;
+import com.app.boletim.dao.AgendamentoDAO;
+import com.app.boletim.dao.ConfiguracaoFirebase;
 import com.app.boletim.fragments.TimePickerFragment;
 import com.app.boletim.models.Agendamento;
+import com.app.boletim.utils.ValidacaoCadastroAgendamento;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -38,7 +41,6 @@ public class CadastroAgendamentosActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         agendamentoId = getIntent().getLongExtra("agendamentoId", -1);
-        idAlunoLogado = getIdAlunoLogado();
 
         if(agendamentoId != -1) {
             materialCalendarView.setSelectedDate(agendamento.getData());
@@ -77,30 +79,21 @@ public class CadastroAgendamentosActivity extends AppCompatActivity {
         String hora = editHora.getText().toString();
         String titulo = editTitulo.getText().toString();
 
-        if(titulo.trim().isEmpty()) {
-            editTitulo.setText("Sem Título");
-        }
-
-        else if(hora.trim().isEmpty()) {
-            editHora.setError("O campo não pode estar vazio");
-        }
-
-        else if(materialCalendarView.getSelectedDate().getCalendar().get(Calendar.DATE) < Calendar.getInstance().get(Calendar.DATE)) {
-            Snackbar.make(view, "Você não pode selecionar uma data anterior a data de hoje!", Snackbar.LENGTH_LONG).show();
-        }
-
-        else {
-            agendamento.setData(data);
-            agendamento.setHora(hora);
-            agendamento.setTitulo(titulo);
-
+        try {
+            ValidacaoCadastroAgendamento.validarCampoVazio(editTitulo, editHora);
+            ValidacaoCadastroAgendamento.validarData(materialCalendarView);
+            AgendamentoDAO.cadastrarAgendamento(titulo, data, hora, getIdAlunoLogado());
             finish();
+        }
+
+        catch (IllegalArgumentException e) {
+            Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_SHORT);
         }
     }
 
-    private long getIdAlunoLogado() {
+    private String getIdAlunoLogado() {
         SharedPreferences preferences = getSharedPreferences("boletim.file", MODE_PRIVATE);
-        long id = preferences.getLong("alunoId", -1);
+        String id = preferences.getString("alunoId", "");
 
         return id;
     }

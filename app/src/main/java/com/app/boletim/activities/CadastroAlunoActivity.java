@@ -7,7 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.app.boletim.R;
+import com.app.boletim.dao.AlunoDAO;
+import com.app.boletim.dao.ConfiguracaoFirebase;
 import com.app.boletim.models.Aluno;
+import com.app.boletim.utils.ValidacaoCadastroAluno;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,58 +50,21 @@ public class CadastroAlunoActivity extends Login {
 
     @OnClick(R.id.btn_salvar_aluno)
     public void salvarAluno(View view) {
+        String nome = editNomeAluno.getText().toString();
+        String email = editEmail.getText().toString();
+        String senha = editSenha.getText().toString();
+        String instituicao = editInstituicao.getText().toString();
+        String mediaInstitucional = editMediaInstitucional.getText().toString();
+        String mediaPessoal = editMediaPessoal.getText().toString();
+
         try {
-            String mediaInstitucional = editMediaInstitucional.getText().toString();
-            String mediaPessoal = editMediaPessoal.getText().toString();
-            String nomeAluno = editNomeAluno.getText().toString();
-            String email = editEmail.getText().toString();
-            String senha = editSenha.getText().toString();
-            String instituicao = editInstituicao.getText().toString();
-
-            aluno.setNome(nomeAluno);
-            aluno.setEmail(email);
-            aluno.setSenha(senha);
-            aluno.setInstitucao(instituicao);
-            aluno.setMediaInstitucional(Double.valueOf(mediaInstitucional));
-            aluno.setMediaPessoal(Double.valueOf(mediaPessoal));
-
-            if(nomeAluno.trim().isEmpty()) {
-                editNomeAluno.setError("O campo não pode estar vazio!");
-            }
-
-            else if(email.trim().isEmpty()) {
-                editEmail.setError("O campo não pode estar vazio!");
-            }
-
-            else if(senha.trim().isEmpty()) {
-                editSenha.setError("O campo não pode estar vazio!");
-            }
-
-            else if(instituicao.trim().isEmpty()) {
-                editInstituicao.setError("O campo não pode estar vazio!");
-            }
-
-            else if(mediaInstitucional.trim().isEmpty()) {
-                editMediaInstitucional.setError("O campo não pode estar vazio!");
-            }
-
-            else if(mediaPessoal.trim().isEmpty() || mediaInstitucional.trim().isEmpty()) {
-                editMediaPessoal.setError("O campo não pode estar vazio!");
-            }
-
-            else if(Double.valueOf(mediaPessoal) < Double.valueOf(mediaInstitucional)) {
-                editMediaPessoal.setError("Média pessoal não pode ser menor que a média Institucional!");
-            }
-
-            else {
-                finish();
-
-                logar(aluno);
-            }
+            ValidacaoCadastroAluno.validarCampoVazio(editNomeAluno, editEmail, editSenha, editInstituicao, editMediaInstitucional, editMediaPessoal);
+            AlunoDAO.cadastrarAluno(nome, email, senha, instituicao, Double.valueOf(mediaInstitucional), Double.valueOf(mediaPessoal));
+            finish();
         }
 
-        catch (NumberFormatException e) {
-            Snackbar.make(view, "Média pessoal, média institucional e quantidade de provas não podem estar vazios!", Snackbar.LENGTH_LONG).show();
+        catch (IllegalArgumentException e) {
+            Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_SHORT);
         }
     }
 }
