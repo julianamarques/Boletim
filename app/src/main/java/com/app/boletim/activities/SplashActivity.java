@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SplashActivity extends AppCompatActivity implements Runnable {
     private FirebaseAuth auth;
-    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +20,11 @@ public class SplashActivity extends AppCompatActivity implements Runnable {
         setContentView(R.layout.activity_splash);
         new Handler().postDelayed(this, 2000);
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        user = auth.getCurrentUser();
     }
 
     @Override
     public void run() {
-        if(!LoginActivity.verificarLogin(user)) {
+        if(!LoginActivity.verificarLogin(auth.getCurrentUser())) {
             startActivity(new Intent(this, LoginActivity.class));
         }
 

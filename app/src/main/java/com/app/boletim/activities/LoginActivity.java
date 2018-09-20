@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Snackbar.make(view, "Login realizado!", Snackbar.LENGTH_SHORT).show();
-                            finish();
+                            abrirActitity();
                         }
 
                         else {
@@ -56,6 +56,10 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void abrirActitity() {
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     public static boolean verificarLogin(FirebaseUser user) {

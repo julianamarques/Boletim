@@ -6,9 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AlunoDAO {
-    private static Aluno aluno;
 
     public static void cadastrarAluno(String nome, String email, String senha, String institucao, double mediaInstitucional, double mediaPessoal, String alunoId) {
+        Aluno aluno = new Aluno();
+
         aluno.setId(alunoId);
         aluno.setNome(nome);
         aluno.setEmail(email);

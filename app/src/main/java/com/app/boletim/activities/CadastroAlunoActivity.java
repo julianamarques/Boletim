@@ -34,6 +34,7 @@ public class CadastroAlunoActivity extends AppCompatActivity {
 
     private Aluno aluno;
     private FirebaseAuth auth;
+    private String alunoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +74,9 @@ public class CadastroAlunoActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                alunoId = auth.getUid();
                                 ValidacaoCadastroAluno.validarCampoVazio(editNomeAluno, editEmail, editSenha, editInstituicao, editMediaInstitucional, editMediaPessoal);
-                                AlunoDAO.cadastrarAluno(nome, email, senha, instituicao, Double.valueOf(mediaInstitucional), Double.valueOf(mediaPessoal), auth.getUid());
+                                AlunoDAO.cadastrarAluno(nome, email, senha, instituicao, Double.valueOf(mediaInstitucional), Double.valueOf(mediaPessoal), alunoId);
                                 finish();
                             }
 
