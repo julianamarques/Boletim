@@ -12,12 +12,10 @@ import com.app.boletim.models.Agendamento;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.objectbox.Box;
 
 public class CadastroAnotacoesActivity extends AppCompatActivity {
     @BindView(R.id.edit_anotacao) protected EditText editAnotacao;
 
-    private Box<Agendamento> agendamentoBox;
     private Agendamento agendamento;
     private long idAlunoLogado;
     private long agendamentoId;
@@ -28,12 +26,10 @@ public class CadastroAnotacoesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_anotacoes);
         ButterKnife.bind(this);
 
-        agendamentoBox = ((App)getApplication()).getBoxStore().boxFor(Agendamento.class);
         idAlunoLogado = getIdAlunoLogado();
         agendamentoId = getIntent().getLongExtra("agendamentoId", -1);
 
         if(agendamentoId != -1) {
-            agendamento = agendamentoBox.get(agendamentoId);
             editAnotacao.setText(agendamento.getAnotacao());
         }
     }
@@ -42,8 +38,6 @@ public class CadastroAnotacoesActivity extends AppCompatActivity {
     public void salvarAnotacao(View view) {
         String anotacao = editAnotacao.getText().toString();
         agendamento.setAnotacao(anotacao);
-        agendamento.getAluno();
-        agendamentoBox.put(agendamento);
 
         finish();
     }

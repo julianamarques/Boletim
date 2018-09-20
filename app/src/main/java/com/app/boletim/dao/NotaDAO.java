@@ -7,9 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NotaDAO {
-    private static Nota nota;
-
     public static void cadastrarNota(double notaBimestral, Disciplina disciplina) {
+        Nota nota = new Nota();
         String id = ConfiguracaoFirebase.getDatabaseReference().child("notas").push().getKey();
 
         nota.setNotaBimestral(notaBimestral);

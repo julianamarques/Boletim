@@ -21,7 +21,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.objectbox.Box;
 
 /**
  * Created by juliana on 16/03/18.
@@ -60,7 +59,7 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Nota nota = this.notas.get(position);
-        double media = nota.getDisciplina().getAluno().getMediaInstitucional();
+        double media = nota.getDisciplina().getMedia();
 
         holder.txtContaBimestre.setText(" " + (position + 1) + "º BIMESTRE");
         holder.txtVerNota.setText(" " + String.valueOf(nota.getNotaBimestral()));

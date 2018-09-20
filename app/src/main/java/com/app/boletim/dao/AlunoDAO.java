@@ -6,12 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AlunoDAO {
-    private static Aluno aluno;
 
-    public static void cadastrarAluno(String nome, String email, String senha, String institucao, double mediaInstitucional, double mediaPessoal) {
-        String id = ConfiguracaoFirebase.getDatabaseReference().child("alunos").push().getKey();
+    public static void cadastrarAluno(String nome, String email, String senha, String institucao, double mediaInstitucional, double mediaPessoal, String alunoId) {
+        Aluno aluno = new Aluno();
 
-        aluno.setId(id);
+        aluno.setId(alunoId);
         aluno.setNome(nome);
         aluno.setEmail(email);
         aluno.setSenha(senha);
@@ -21,7 +20,7 @@ public class AlunoDAO {
 
         Map<String, Object> alunoValues = aluno.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/alunos/" + id, alunoValues);
+        childUpdates.put("/alunos/" + alunoId, alunoValues);
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
     }
 }
