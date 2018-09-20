@@ -28,7 +28,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.objectbox.Box;
 
 /**
  * Created by Juliana on 16/02/2018.
@@ -69,9 +68,9 @@ public class ListaDisciplinasAdapter extends RecyclerView.Adapter<ListaDisciplin
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Disciplina disciplina = this.disciplinas.get(position);
-        int totalDeProvas = disciplina.getAluno().getQtdProvas();
+        //int totalDeProvas = disciplina.getQtdProvas();
         double media = disciplina.getMedia();
-        double mediaInstitucional = disciplina.getAluno().getMediaInstitucional();
+        //double mediaInstitucional = disciplina.getMediaInstitucional();
 
 
         holder.txtNomeDisciplina.setText(disciplina.getNome());
@@ -89,7 +88,7 @@ public class ListaDisciplinasAdapter extends RecyclerView.Adapter<ListaDisciplin
             configurarClickCurto(holder.itemView, disciplina, position);
         }
 
-        if(media >= mediaInstitucional) {
+        if(media >= 0) {
             holder.txtMedia.setTextColor(Color.BLUE);
         }
 
@@ -97,15 +96,15 @@ public class ListaDisciplinasAdapter extends RecyclerView.Adapter<ListaDisciplin
             holder.txtMedia.setTextColor(Color.RED);
         }
 
-        if(disciplina.getNotas().size() == totalDeProvas) {
+        if(disciplina.getNotas().size() == 0) {
             holder.txtMsg.setVisibility(View.VISIBLE);
-            holder.txtMsg.setText(disciplina.informarSituacao());
+            holder.txtMsg.setText("");
 
-            if(media >= mediaInstitucional) {
+            if(media >= 0) {
                 holder.txtMsg.setTextColor(Color.BLUE);
             }
 
-            else if(disciplina.estaDeProvaFinal()) {
+            else if(true) {
                 holder.txtMsg.setTextColor(Color.parseColor("#f4a142"));
                 holder.txtMsg.setText("Você está de prova final!");
             }
@@ -124,9 +123,9 @@ public class ListaDisciplinasAdapter extends RecyclerView.Adapter<ListaDisciplin
     }
 
     public void configurarClickLongo(final View itemView, final Disciplina disciplina, final int position) {
-        int totalDeProvas = this.disciplinas.get(position).getAluno().getQtdProvas();
+        //int totalDeProvas = this.disciplinas.get(position).getAlunoId();
         int tamanhoDaListaDeNotas = this.disciplinas.get(position).getNotas().size();
-        double mediaInstitucional = this.disciplinas.get(position).getAluno().getMediaInstitucional();
+        //double mediaInstitucional = this.disciplinas.get(position);
 
         itemView.setOnLongClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(context, view);
@@ -134,7 +133,7 @@ public class ListaDisciplinasAdapter extends RecyclerView.Adapter<ListaDisciplin
 
             popupMenu.setOnMenuItemClickListener(item -> {
                 if(item.getItemId() == R.id.adicionar_notas) {
-                    if(tamanhoDaListaDeNotas == totalDeProvas) {
+                    if(tamanhoDaListaDeNotas == 0) {
                         Snackbar.make(view, "Não é possível adicionar mais notas!", Snackbar.LENGTH_LONG).show();
 
                     }
@@ -152,7 +151,7 @@ public class ListaDisciplinasAdapter extends RecyclerView.Adapter<ListaDisciplin
                 }
 
                 else if(item.getItemId() == R.id.adicionar_prova_final) {
-                    if(tamanhoDaListaDeNotas < totalDeProvas) {
+                    if(tamanhoDaListaDeNotas < 0) {
                         if(this.disciplinas.get(position).getDisciplinaExtra()) {
                             Snackbar.make(view, "Você não pode adicionar nota final em disciplinas extras!", Snackbar.LENGTH_LONG).show();
                         }
@@ -163,7 +162,7 @@ public class ListaDisciplinasAdapter extends RecyclerView.Adapter<ListaDisciplin
                     }
 
                     else {
-                        if(disciplina.getMedia() >= mediaInstitucional) {
+                        if(disciplina.getMedia() >= 0) {
                             Snackbar.make(view, "Você não precisa de Prova Final!", Snackbar.LENGTH_LONG).show();
                         }
 

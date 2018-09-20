@@ -6,9 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DisciplinaDAO {
-    private static Disciplina disciplina;
-
     public static void cadastrarDisciplina(String nome, String professor, boolean disciplinaExtra, String alunoId) {
+        Disciplina disciplina = new Disciplina();
         String id = ConfiguracaoFirebase.getDatabaseReference().child("disciplinas").push().getKey();
 
         disciplina.setId(id);

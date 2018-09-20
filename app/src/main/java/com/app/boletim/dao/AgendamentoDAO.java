@@ -7,9 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AgendamentoDAO {
-    private static Agendamento agendamento;
-
     public static void cadastrarAgendamento(String titulo, Date data, String hora, String alunoId) {
+        Agendamento agendamento = new Agendamento();
         String id = ConfiguracaoFirebase.getDatabaseReference().child("agendamentos").push().getKey();
 
         agendamento.setId(id);

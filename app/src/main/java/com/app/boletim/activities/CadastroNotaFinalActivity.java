@@ -12,12 +12,10 @@ import com.app.boletim.models.Disciplina;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.objectbox.Box;
 
 public class CadastroNotaFinalActivity extends AppCompatActivity {
     @BindView(R.id.edit_nota_prova_final) protected EditText editNotaProvaFinal;
 
-    private Box<Disciplina> disciplinaBox;
     private Disciplina disciplina;
     private long disciplinaId;
     private long idAlunoLogado;
@@ -28,12 +26,10 @@ public class CadastroNotaFinalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_nota_final);
         ButterKnife.bind(this);
 
-        disciplinaBox = ((App)getApplication()).getBoxStore().boxFor(Disciplina.class);
         idAlunoLogado = getIdAlunoLogado();
         disciplinaId = getIntent().getLongExtra("disciplinaId", -1);
 
         if(disciplinaId != -1) {
-            disciplina = disciplinaBox.get(disciplinaId);
             editNotaProvaFinal.setText(String.valueOf(disciplina.getProvaFinal()));
         }
     }
@@ -52,9 +48,6 @@ public class CadastroNotaFinalActivity extends AppCompatActivity {
 
         else {
             disciplina.setProvaFinal(Double.valueOf(notaProvaFinal));
-            disciplina.getAluno();
-            disciplinaBox.put(disciplina);
-
             finish();
         }
     }

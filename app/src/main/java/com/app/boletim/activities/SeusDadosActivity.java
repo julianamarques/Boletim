@@ -36,7 +36,6 @@ public class SeusDadosActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        aluno = obterAlunoLogado();
 
         txtVerNome.setText(aluno.getNome());
         txtVerEmail.setText(aluno.getEmail());
@@ -57,21 +56,9 @@ public class SeusDadosActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.editar_aluno) {
-            editar();
+
         }
 
         return false;
-    }
-
-    private void editar() {
-        Intent intent = new Intent(this, CadastroAlunoActivity.class);
-        intent.putExtra("alunoId", obterAlunoLogado().getId());
-
-        startActivity(intent);
-    }
-
-    private Aluno obterAlunoLogado(){
-        final SharedPreferences preferences = getSharedPreferences("boletim.file", MODE_PRIVATE);
-        long id = preferences.getLong("alunoId", -1);
     }
 }

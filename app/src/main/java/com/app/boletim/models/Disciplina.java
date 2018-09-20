@@ -83,68 +83,13 @@ public class Disciplina {
         return alunoId;
     }
 
-    public double getMedia() {
-        int totalDeProvas = getAluno().getQtdProvas();
-        double soma = 0;
-        double mediaInstitucional = getAluno().getMediaInstitucional();
+    public double getMedia() { ;
 
-        for(int i = 0; i < getNotas().size(); i++) {
-            soma += getNotas().get(i).getNotaBimestral();
-        }
 
-        this.media = soma / totalDeProvas;
-
-        if(provaFinal >= mediaInstitucional) {
-            return provaFinal;
-        }
 
         return media;
     }
 
-    public String informarSituacao() {
-        double mediaInstitucional = getAluno().getMediaInstitucional();
-        double mediaPessoal = getAluno().getMediaPessoal();
-
-        if(estaDeProvaFinal()) {
-            if(getMedia() >= mediaInstitucional && getMedia() > mediaPessoal) {
-                return "Parabéns! Você foi aprovado pela prova final e está acima da sua média pessoal.";
-            }
-
-            else if(getMedia() >= mediaInstitucional && getMedia() == mediaPessoal) {
-                return "Parabéns! Você foi aprovado pela prova final e atingiu sua média pessoal.";
-            }
-
-            else if(getMedia() >= mediaInstitucional && getMedia() < mediaPessoal) {
-                return "Parabéns! Você foi aprovado pela prova final, mas ainda está abaixo da sua média pessoal.";
-            }
-        }
-
-        else {
-            if(getMedia() >= mediaInstitucional && getMedia() > mediaPessoal) {
-                return "Parabéns! Você foi aprovado e está acima da sua média pessoal.";
-            }
-
-            else if(getMedia() >= mediaInstitucional && getMedia() == mediaPessoal) {
-                return "Parabéns! Você foi aprovado pela prova final e atingiu sua média pessoal.";
-            }
-
-            else if(getMedia() >= mediaInstitucional && getMedia() < mediaPessoal) {
-                return "Parabéns! Você foi aprovado, mas ainda está abaixo da sua média pessoal.";
-            }
-        }
-
-        return "Infelizmente, você reprovou.";
-    }
-
-    public boolean estaDeProvaFinal() {
-        double mediaInstitucional = getAluno().getMediaInstitucional();
-
-        if(getMedia() < mediaInstitucional && provaFinal == 0) {
-            return true;
-        }
-
-        return false;
-    }
 
     @Exclude
     public Map<String, Object> toMap() {
