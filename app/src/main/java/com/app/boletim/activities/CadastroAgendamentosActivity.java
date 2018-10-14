@@ -11,9 +11,11 @@ import android.widget.EditText;
 import com.app.boletim.R;
 import com.app.boletim.dao.AgendamentoDAO;
 import com.app.boletim.dao.ConfiguracaoFirebase;
+import com.app.boletim.dao.ConfiguracaoFirebaseAuth;
 import com.app.boletim.fragments.TimePickerFragment;
 import com.app.boletim.models.Agendamento;
 import com.app.boletim.utils.ValidacaoCadastroAgendamento;
+import com.google.firebase.auth.FirebaseAuth;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -30,9 +32,7 @@ public class CadastroAgendamentosActivity extends AppCompatActivity {
     @BindView(R.id.edit_titulo) protected EditText editTitulo;
     @BindView(R.id.edit_hora) protected EditText editHora;
 
-    private Agendamento agendamento;
-    private long agendamentoId;
-    private long idAlunoLogado;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +40,8 @@ public class CadastroAgendamentosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_agendamentos);
         ButterKnife.bind(this);
 
-        agendamentoId = getIntent().getLongExtra("agendamentoId", -1);
-
-        if(agendamentoId != -1) {
-            materialCalendarView.setSelectedDate(agendamento.getData());
-            editTitulo.setText(agendamento.getTitulo());
-            editHora.setText(agendamento.getHora());
-        }
-
-        else {
-            agendamento = new Agendamento();
-        }
-
         configurarCalendario();
+        auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
     }
 
     public void configurarCalendario() {
@@ -82,19 +71,12 @@ public class CadastroAgendamentosActivity extends AppCompatActivity {
         try {
             ValidacaoCadastroAgendamento.validarCampoVazio(editTitulo, editHora);
             ValidacaoCadastroAgendamento.validarData(materialCalendarView);
-            AgendamentoDAO.cadastrarAgendamento(titulo, data, hora, getIdAlunoLogado());
+            AgendamentoDAO.cadastrarAgendamento(titulo, data, hora, auth.getUid());
             finish();
         }
 
         catch (IllegalArgumentException e) {
             Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_SHORT);
         }
-    }
-
-    private String getIdAlunoLogado() {
-        SharedPreferences preferences = getSharedPreferences("boletim.file", MODE_PRIVATE);
-        String id = preferences.getString("alunoId", "");
-
-        return id;
     }
 }

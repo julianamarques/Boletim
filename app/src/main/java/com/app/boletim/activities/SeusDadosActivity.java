@@ -1,7 +1,5 @@
 package com.app.boletim.activities;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,7 +8,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.app.boletim.R;
-import com.app.boletim.models.Aluno;
+import com.app.boletim.dao.AlunoDAO;
+import com.app.boletim.dao.ConfiguracaoFirebaseAuth;
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,30 +19,17 @@ public class SeusDadosActivity extends AppCompatActivity {
     @BindView(R.id.txt_ver_nome) protected TextView txtVerNome;
     @BindView(R.id.txt_ver_email) protected TextView txtVerEmail;
     @BindView(R.id.txt_ver_instituicao) protected TextView txtVerInstituicao;
-    @BindView(R.id.txt_ver_media_instituicao) protected TextView txtVerMediaMediaInstituicao;
-    @BindView(R.id.txt_ver_media_pessoal) protected TextView txtVerMediaPessoal;
-    @BindView(R.id.txt_ver_qtd_provas) protected TextView txtVerQtdProvas;
 
-    private Aluno aluno;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seus_dados);
         ButterKnife.bind(this);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-        txtVerNome.setText(aluno.getNome());
-        txtVerEmail.setText(aluno.getEmail());
-        txtVerInstituicao.setText(aluno.getInstitucao());
-        txtVerMediaMediaInstituicao.setText(String.valueOf(aluno.getMediaInstitucional()));
-        txtVerMediaPessoal.setText(String.valueOf(aluno.getMediaPessoal()));
-        txtVerQtdProvas.setText(String.valueOf(aluno.getQtdProvas()));
+        auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
+        AlunoDAO.exibirAlunoLogado(auth, txtVerNome, txtVerEmail, txtVerInstituicao);
     }
 
     @Override
@@ -61,4 +48,5 @@ public class SeusDadosActivity extends AppCompatActivity {
 
         return false;
     }
+
 }

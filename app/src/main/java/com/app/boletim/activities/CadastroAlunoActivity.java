@@ -28,11 +28,8 @@ public class CadastroAlunoActivity extends AppCompatActivity {
     @BindView(R.id.edit_email) protected EditText editEmail;
     @BindView(R.id.edit_senha) protected EditText editSenha;
     @BindView(R.id.edit_instituicao) protected EditText editInstituicao;
-    @BindView(R.id.edit_media_institucional) protected EditText editMediaInstitucional;
-    @BindView(R.id.edit_media_pessoal) protected EditText editMediaPessoal;
     @BindView(R.id.btn_salvar_aluno) protected Button btnSalvarAluno;
 
-    private Aluno aluno;
     private FirebaseAuth auth;
     private String alunoId;
 
@@ -41,20 +38,6 @@ public class CadastroAlunoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_aluno);
         ButterKnife.bind(this);
-        long id = getIntent().getLongExtra("alunoId", -1);
-
-        if(id != -1) {
-            editNomeAluno.setText(aluno.getNome());
-            editEmail.setText(aluno.getEmail());
-            editSenha.setText(aluno.getSenha());
-            editInstituicao.setText(aluno.getInstitucao());
-            editMediaInstitucional.setText(String.valueOf(aluno.getMediaInstitucional()));
-            editMediaPessoal.setText(String.valueOf(aluno.getMediaPessoal()));
-        }
-
-        else {
-            aluno = new Aluno();
-        }
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
     }
@@ -65,8 +48,6 @@ public class CadastroAlunoActivity extends AppCompatActivity {
         String email = editEmail.getText().toString();
         String senha = editSenha.getText().toString();
         String instituicao = editInstituicao.getText().toString();
-        String mediaInstitucional = editMediaInstitucional.getText().toString();
-        String mediaPessoal = editMediaPessoal.getText().toString();
 
         try {
             auth.createUserWithEmailAndPassword(email, senha)
@@ -75,8 +56,8 @@ public class CadastroAlunoActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 alunoId = auth.getUid();
-                                ValidacaoCadastroAluno.validarCampoVazio(editNomeAluno, editEmail, editSenha, editInstituicao, editMediaInstitucional, editMediaPessoal);
-                                AlunoDAO.cadastrarAluno(nome, email, senha, instituicao, Double.valueOf(mediaInstitucional), Double.valueOf(mediaPessoal), alunoId);
+                                ValidacaoCadastroAluno.validarCampoVazio(editNomeAluno, editEmail, editSenha, editInstituicao);
+                                AlunoDAO.cadastrarAluno(nome, email, senha, instituicao, alunoId);
                                 finish();
                             }
 

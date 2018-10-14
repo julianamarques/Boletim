@@ -2,6 +2,7 @@ package com.app.boletim.models;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
  * Created by juliana on 15/03/18.
  */
 
-public class Agendamento {
+public class Agendamento implements Serializable {
     private String id;
     private String titulo;
     private Date data;
@@ -77,7 +78,7 @@ public class Agendamento {
         agendamento.put("data", data);
         agendamento.put("hora", hora);
         agendamento.put("anotacao", anotacao);
-        agendamento.put("AlunoId", alunoId);
+        agendamento.put("alunoId", alunoId);
 
         return agendamento;
     }

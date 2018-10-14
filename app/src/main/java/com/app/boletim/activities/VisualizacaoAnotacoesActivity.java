@@ -14,7 +14,6 @@ public class VisualizacaoAnotacoesActivity extends AppCompatActivity {
     @BindView(R.id.txt_ver_anotacao) protected TextView txtVerAnotacao;
 
     private Agendamento agendamento;
-    private long agendamentoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +21,20 @@ public class VisualizacaoAnotacoesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_visualizacao_anotacoes);
         ButterKnife.bind(this);
 
-        agendamentoId = getIntent().getLongExtra("agendamentoId", -1);
+        agendamento = (Agendamento) getIntent().getSerializableExtra("agendamento");
+    }
 
-        if(agendamentoId != -1) {
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-            getSupportActionBar().setTitle(agendamento.getTitulo());
+        getSupportActionBar().setTitle(agendamento.getTitulo());
+
+        if (agendamento.getAnotacao().isEmpty()) {
+            txtVerAnotacao.setText("");
+        }
+
+        else {
             txtVerAnotacao.setText(agendamento.getAnotacao());
         }
     }

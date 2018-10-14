@@ -57,6 +57,68 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_media_minima"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="@string/media_minima"
+                android:inputType="numberDecimal" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_media_pessoal"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="@string/media_pessoal"
+                android:inputType="numberDecimal" />
+
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:id="@+id/txt_label_qtd_provas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quantidade_provas"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/txt_qtd_provas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"/>
+
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seek_qtd_provas"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:min="0"
+        android:max="10"/>
+
     <Button
         android:id="@+id/btn_salvar_disciplina"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"

@@ -2,7 +2,6 @@ package com.app.boletim.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -16,10 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.app.boletim.R;
-import com.app.boletim.adapters.ListaAgendamentosAdapter;
+import com.app.boletim.adapters.AgendamentosAdapter;
 import com.app.boletim.dao.ConfiguracaoFirebase;
+import com.app.boletim.dao.ConfiguracaoFirebaseAuth;
 import com.app.boletim.models.Agendamento;
-import com.app.boletim.models.Aluno;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -34,7 +34,8 @@ import butterknife.OnClick;
 public class AgendamentosActivity extends AppCompatActivity {
     @BindView(R.id.rv_lista_agendamentos) protected RecyclerView recyclerAgendamentos;
 
-    private long idAlunoLogado;
+    private AgendamentosAdapter adapter;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +43,16 @@ public class AgendamentosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_agendamentos);
         ButterKnife.bind(this);
 
-        idAlunoLogado = getIdAlunoLogado();
+        auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
+        adapter = new AgendamentosAdapter(this, auth);
+
         recyclerAgendamentos.setLayoutManager(new LinearLayoutManager(this));
-        ListaAgendamentosAdapter adapter = new ListaAgendamentosAdapter(this, listarAgendamentos());
         recyclerAgendamentos.setAdapter(adapter);
     }
 
@@ -64,13 +66,6 @@ public class AgendamentosActivity extends AppCompatActivity {
                 recyclerAgendamentos.setVisibility(View.VISIBLE);
             }
         }, 500);
-    }
-
-    private long getIdAlunoLogado() {
-        SharedPreferences preferences = getSharedPreferences("boletim.file", MODE_PRIVATE);
-        long id = preferences.getLong("alunoId", -1);
-
-        return id;
     }
 
     @Override
@@ -107,26 +102,5 @@ public class AgendamentosActivity extends AppCompatActivity {
                 .create().show();
     }
 
-    public List<Agendamento> listarAgendamentos() {
-        final List<Agendamento> agendamentos = new ArrayList<>();
 
-        ConfiguracaoFirebase.getDatabaseReference().child("agendamentos").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                agendamentos.clear();
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Agendamento agendamento = snapshot.getValue(Agendamento.class);
-                    agendamentos.add(agendamento);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return agendamentos;
-    }
 }

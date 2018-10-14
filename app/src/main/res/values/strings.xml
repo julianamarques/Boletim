@@ -49,4 +49,6 @@
     <string name="cancelar">Cancelar</string>
     <string name="remover_todos">Remover Todos</string>
     <string name="remover_todos_os_dados">Remover Todos os Dados</string>
+    <string name="media_minima">Média Mínima</string>
+    <string name="quantidade_provas">Quantidade de Provas: </string>
 </resources>

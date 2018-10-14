@@ -1,8 +1,7 @@
 package com.app.boletim.adapters;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +12,11 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.app.boletim.R;
-import com.app.boletim.activities.CadastroNotasActivity;
+import com.app.boletim.dao.DisciplinaDAO;
+import com.app.boletim.dao.NotaDAO;
 import com.app.boletim.models.Disciplina;
 import com.app.boletim.models.Nota;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -26,14 +27,13 @@ import butterknife.ButterKnife;
  * Created by juliana on 16/03/18.
  */
 
-public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.ViewHolder> {
+public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.ViewHolder> {
     private Context context;
-    private Nota nota;
     private List<Nota> notas;
 
-    public ListaNotasAdapter(Context context, List<Nota> notas) {
+    public NotasAdapter(Context context, Disciplina disciplina) {
         this.context = context;
-        this.notas = notas;
+        this.notas = NotaDAO.listarNotas(this, disciplina);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -59,23 +59,9 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Nota nota = this.notas.get(position);
-        double media = nota.getDisciplina().getMedia();
 
         holder.txtContaBimestre.setText(" " + (position + 1) + "º BIMESTRE");
         holder.txtVerNota.setText(" " + String.valueOf(nota.getNotaBimestral()));
-
-        if(nota.getNotaBimestral() < media) {
-            holder.txtBimestreMsg.setVisibility(View.VISIBLE);
-            holder.txtBimestreMsg.setText("Sua nota está abaixo da média.");
-            holder.txtBimestreMsg.setTextColor(Color.parseColor("#f4a142"));
-            holder.txtVerNota.setTextColor(Color.RED);
-        }
-
-        else {
-            holder.txtVerNota.setTextColor(Color.BLUE);
-            holder.txtBimestreMsg.setTextColor(Color.BLUE);
-            holder.txtBimestreMsg.setVisibility(View.VISIBLE);
-        }
 
         configurarClickLongo(holder.itemView, nota, position);
     }
@@ -85,6 +71,10 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.Vi
         return this.notas.size();
     }
 
+    public List<Nota> getNotas() {
+        return notas;
+    }
+
     public void configurarClickLongo(final View itemView, final Nota nota, final int position) {
         itemView.setOnLongClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(context, view);
@@ -92,7 +82,7 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.Vi
 
             popupMenu.setOnMenuItemClickListener(item -> {
                 if(item.getItemId() == R.id.remover_nota) {
-                    remover(itemView, nota, position);
+                    //remover(itemView, nota, position);
                 }
 
                 return false;
@@ -102,22 +92,5 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.Vi
 
             return true;
         });
-    }
-
-    public void remover(View view, Nota nota, int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
-        builder.setTitle("Boletim");
-        builder.setMessage("Deseja remover a nota da lista?");
-
-        builder.setPositiveButton("SIM", (dialog, which) -> {
-            this.notas.remove(nota);
-
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, getItemCount());
-            Snackbar.make(view, "Nota removida!", Snackbar.LENGTH_SHORT).show();
-        });
-
-        builder.setNegativeButton("NÃO", null);
-        builder.create().show();
     }
 }

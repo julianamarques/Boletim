@@ -1,10 +1,12 @@
 package com.app.boletim.models;
 
+import java.io.Serializable;
+
 /**
  * Created by juliana on 15/03/18.
  */
 
-public class Nota {
+public class Nota implements Serializable {
     private String id;
     private double notaBimestral;
     private Disciplina disciplina;

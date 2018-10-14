@@ -15,10 +15,7 @@ public class Aluno {
     private String nome;
     private String email;
     private String senha;
-    private String institucao;
-    private double mediaInstitucional;
-    private double mediaPessoal;
-    final private static int qtdProvas = 4;
+    private String instituicao;
     private List<Disciplina> disciplinas;
     private List<Agendamento> agendamentos;
 
@@ -54,32 +51,12 @@ public class Aluno {
         return senha;
     }
 
-    public void setInstitucao(String institucao) {
-        this.institucao = institucao;
+    public void setInstituicao(String instituicao) {
+        this.instituicao = instituicao;
     }
 
-    public String getInstitucao() {
-        return institucao;
-    }
-
-    public void setMediaInstitucional(double mediaInstitucional) {
-        this.mediaInstitucional = mediaInstitucional;
-    }
-
-    public double getMediaInstitucional() {
-        return mediaInstitucional;
-    }
-
-    public void setMediaPessoal(double mediaPessoal) {
-        this.mediaPessoal = mediaPessoal;
-    }
-
-    public double getMediaPessoal() {
-        return mediaPessoal;
-    }
-
-    public int getQtdProvas() {
-        return qtdProvas;
+    public String getInstituicao() {
+        return instituicao;
     }
 
     public void setDisciplinas(List<Disciplina> disciplinas) {
@@ -106,11 +83,8 @@ public class Aluno {
         aluno.put("nome", nome);
         aluno.put("email", email);
         aluno.put("senha", senha);
-        aluno.put("mediaInstitucional", mediaInstitucional);
-        aluno.put("mediaPessoal", mediaPessoal);
-        aluno.put("qtdProvas", qtdProvas);
+        aluno.put("instituicao", instituicao);
 
         return aluno;
     }
-
 }

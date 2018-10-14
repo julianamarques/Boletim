@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.app.boletim.R;
+import com.app.boletim.dao.AgendamentoDAO;
 import com.app.boletim.models.Agendamento;
+import com.app.boletim.models.Disciplina;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,10 +17,7 @@ import butterknife.OnClick;
 
 public class CadastroAnotacoesActivity extends AppCompatActivity {
     @BindView(R.id.edit_anotacao) protected EditText editAnotacao;
-
     private Agendamento agendamento;
-    private long idAlunoLogado;
-    private long agendamentoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,18 +25,13 @@ public class CadastroAnotacoesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_anotacoes);
         ButterKnife.bind(this);
 
-        idAlunoLogado = getIdAlunoLogado();
-        agendamentoId = getIntent().getLongExtra("agendamentoId", -1);
-
-        if(agendamentoId != -1) {
-            editAnotacao.setText(agendamento.getAnotacao());
-        }
+        agendamento = (Agendamento) getIntent().getSerializableExtra("agendamento");
     }
 
     @OnClick(R.id.btn_salvar_anotacao)
     public void salvarAnotacao(View view) {
         String anotacao = editAnotacao.getText().toString();
-        agendamento.setAnotacao(anotacao);
+        AgendamentoDAO.cadastrarAnotacao(agendamento, anotacao);
 
         finish();
     }
@@ -45,12 +39,5 @@ public class CadastroAnotacoesActivity extends AppCompatActivity {
     @OnClick(R.id.btn_cancelar_anotacao)
     public void cancelar(View view) {
         finish();
-    }
-
-    private long getIdAlunoLogado() {
-        SharedPreferences preferences = getSharedPreferences("boletim.file", MODE_PRIVATE);
-        long id = preferences.getLong("alunoId", -1);
-
-        return id;
     }
 }
