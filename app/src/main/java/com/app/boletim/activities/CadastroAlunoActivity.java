@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.app.boletim.R;
 import com.app.boletim.dal.App;
 import com.app.boletim.models.Aluno;
+import com.app.boletim.models.Login;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
