@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginTop="30dp"
+    android:screenOrientation="portrait"
     tools:context="com.app.boletim.activities.LoginActivity">
 
     <android.support.design.widget.TextInputLayout
