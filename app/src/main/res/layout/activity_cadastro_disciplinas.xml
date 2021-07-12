@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:backgroundTint="#fff"
     android:orientation="vertical"
+    android:screenOrientation="portrait"
     android:paddingTop="30dp"
     tools:context="com.app.boletim.activities.CadastroDisciplinasActivity">
 
