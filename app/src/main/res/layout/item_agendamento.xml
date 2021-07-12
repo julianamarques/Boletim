@@ -6,7 +6,8 @@
     android:layout_margin="8dp"
     android:elevation="@dimen/cardview_compat_inset_shadow"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:screenOrientation="portrait">
 
     <LinearLayout
         android:layout_width="match_parent"
