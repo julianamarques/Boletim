@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="20dp"
+    android:screenOrientation="portrait"
     tools:context="com.app.boletim.activities.SeusDadosActivity">
 
     <ImageView
