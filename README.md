@@ -4,6 +4,11 @@ App para acompanhamento do desempenho escolar de estudantes do ensino médio.
 
 É possível registrar as notas dos 4 bimestres do ano, com feedback da situação do aluno em cada disciplina, de acordo com a média escolar e pessoal.
 
+### Pré-Requisitos:
+* Java 8
+* Gradle 4.4
+* Android Studio
+
 #### Funcionalidades:
 
 * Cadastro / Login do aluno;
